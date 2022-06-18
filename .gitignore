@@ -1,0 +1,6 @@
+# folders applications
+/node_modules
+/data
+
+# dot environement
+.env
