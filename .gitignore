@@ -1,6 +1,6 @@
 # folders applications
 /node_modules
-/data
+/src/data
 
 # dot environement
 .env
