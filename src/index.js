@@ -254,6 +254,26 @@ app.patch('/member/bank/update', async function (req, res) {
     }
 });
 
+app.patch('/guild/data/update', async function (req, res) {
+    try {
+        let json = await Exe.readJSON(process.env.JSON_ACCESS);
+        let _objJSON = JSON.parse(json);
+        const { id, attribute, value, key } = req.query;        
+
+        if (key === process.env.PASS) {
+            _objJSON.data[id][attribute] = value;            
+
+            await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
+            res.status(200).send(`UPDATE - ${id} (${attribute}) Guild Updated.`);
+        } else {
+            console.log('ERROR - Incorrect Password');
+            res.status(200).send("You don't have access to the API.");
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
 // Create a server to listen at process.env.PORT 8080
 var server = app.listen(process.env.PORT, function () {
     var host = server.address().address
