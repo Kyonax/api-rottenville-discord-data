@@ -5,6 +5,10 @@ const app = express();
 
 require("dotenv").config();
 
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use(express.static(__dirname + "public"))
 
 app.get('/guilds', async (req, res) => {
@@ -275,6 +279,9 @@ app.patch('/guild/data/update', async function (req, res) {
         res.status(400).send(error.message);
     }
 });
+
+// add router in the Express app.
+app.use("/", router);
 
 // Create a server to listen at process.env.PORT 8080
 var server = app.listen(process.env.PORT, function () {
