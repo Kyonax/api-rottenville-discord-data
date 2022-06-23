@@ -1,5 +1,6 @@
 const Exe = require('../tools/functions')
 const express = require('express');
+const router = express.Router();
 const app = express();
 
 require("dotenv").config();
@@ -54,7 +55,7 @@ app.get('/guild/:guild/member/:id', async (req, res) => {
 
 // POST
 
-app.post('/guild/create', async function (req, res) {
+router.post('/guild/create', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);           
         const { id, owner, language, key } = req.query;
