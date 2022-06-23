@@ -136,10 +136,15 @@ router.post('/member/perms/:type/update', async function (req, res) {
         let _member = _objJSON.data[guild].members.all[id];
 
         if (key === process.env.PASS) {
-            _member.perms[req.params.type] = value;
-            _objJSON.data[guild].members[req.params.type][id] = _member;
+            if (value === 1) {
+                _member.perms[req.params.type] = value;
+                _objJSON.data[guild].members[req.params.type][id] = _member;
+            } else {
+                _member.perms[req.params.type] = value;
+                delete _objJSON.data[guild].members[req.params.type][id]
+            }
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
-            res.status(200).send("POST - New Perms Added.");
+            res.status(200).send("POST - New Perms Updated.");
         } else {
             console.log('ERROR - Incorrect Password');
             res.status(200).send("You don't have access to the API.");
@@ -157,7 +162,7 @@ router.post('/guild/delete', async function (req, res) {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
         const { id, key } = req.body;
-        
+
         if (key === process.env.PASS) {
             delete _objJSON.data[id];
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
