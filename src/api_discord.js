@@ -201,7 +201,7 @@ router.post('/member/delete', async function (req, res) {
 
 //UPDATE
 
-router.patch('/member/data/update', async function (req, res) {
+router.post('/member/data/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
@@ -224,7 +224,7 @@ router.patch('/member/data/update', async function (req, res) {
     }
 });
 
-router.patch('/member/status/update', async function (req, res) {
+router.post('/member/status/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
@@ -244,7 +244,7 @@ router.patch('/member/status/update', async function (req, res) {
     }
 });
 
-router.patch('/member/bank/update', async function (req, res) {
+router.post('/member/bank/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
@@ -264,7 +264,7 @@ router.patch('/member/bank/update', async function (req, res) {
     }
 });
 
-router.patch('/guild/data/update', async function (req, res) {
+router.post('/guild/data/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
