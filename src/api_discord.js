@@ -194,6 +194,26 @@ router.post('/member/delete', async function (req, res) {
     }
 });
 
+router.post('/member/:type/remove', async function (req, res) {
+    try {
+        let json = await Exe.readJSON(process.env.JSON_ACCESS);
+        let _objJSON = JSON.parse(json);
+        const { id, guild, key } = req.body;
+
+        if (key === process.env.PASS) {
+            delete _objJSON.data[guild].members[req.params.type][id];            
+            
+            await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
+            res.status(200).send(`DELETE - ${id} Member Deleted.`);
+        } else {
+            console.log('ERROR - Incorrect Password');
+            res.status(200).send("You don't have access to the API.");
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
 //UPDATE
 
 router.patch('/member/data/update', async function (req, res) {
