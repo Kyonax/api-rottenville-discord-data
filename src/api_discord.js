@@ -152,7 +152,7 @@ router.post('/member/perms/:type/add', async function (req, res) {
 
 //DELETE 
 
-router.delete('/guild/delete', async function (req, res) {
+router.post('/guild/delete', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
