@@ -157,8 +157,7 @@ router.post('/guild/delete', async function (req, res) {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
         const { id, key } = req.body;
-        console.log(req)
-        console.log(req.body)
+        
         if (key === process.env.PASS) {
             delete _objJSON.data[id];
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
@@ -172,12 +171,11 @@ router.post('/guild/delete', async function (req, res) {
     }
 });
 
-router.delete('/member/delete', async function (req, res) {
+router.post('/member/delete', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
         const { id, guild, key } = req.body;
-
 
         if (key === process.env.PASS) {
             delete _objJSON.data[guild].members.all[id];
