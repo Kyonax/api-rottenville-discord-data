@@ -74,7 +74,7 @@ app.post('/guild/create', async function (req, res) {
         }
         else {
             console.log('ERROR - Incorrect Password');
-            res.status(200).send("You don't have access to the API.");
+            res.status(200).send(`You don't have access to the API | KEY: ${key}`);
         }
     } catch (error) {
         res.status(400).send(error.message);
