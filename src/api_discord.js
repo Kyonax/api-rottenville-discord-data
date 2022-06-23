@@ -57,7 +57,7 @@ app.get('/guild/:guild/member/:id', async (req, res) => {
 app.post('/guild/create', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);           
-        const { id, owner, language, key } = req.query;
+        const { id, owner, language, key } = req.config.data;
         let _objJSON = JSON.parse(json);
 
         let _obj = {
