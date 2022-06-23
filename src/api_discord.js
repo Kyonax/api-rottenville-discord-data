@@ -1,5 +1,6 @@
 const Exe = require('../tools/functions')
 const express = require('express');
+const bodyParser = require("body-parser");
 const router = express.Router();
 const app = express();
 
