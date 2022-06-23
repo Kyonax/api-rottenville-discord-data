@@ -138,11 +138,18 @@ router.post('/member/perms/:type/update', async function (req, res) {
         if (key === process.env.PASS) {
             if (value === 1) {
                 _member.perms[req.params.type] = value;
+                delete _member.warnings
+                delete _member.language
+                delete _member.rank
+                delete _member.status
+                delete _member.perms
+                delete _member.bank
                 _objJSON.data[guild].members[req.params.type][id] = _member;
             } else {
                 _member.perms[req.params.type] = value;
                 delete _objJSON.data[guild].members[req.params.type][id]
             }
+
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
             res.status(200).send("POST - New Perms Updated.");
         } else {
@@ -208,7 +215,7 @@ router.post('/member/data/update', async function (req, res) {
         const { id, guild, attribute, value, key } = req.body;
 
         if (key === process.env.PASS) {
-            _objJSON.data[guild].members.all[id][attribute] = value;           
+            _objJSON.data[guild].members.all[id][attribute] = value;
 
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
             res.status(200).send(`UPDATE - ${id} (${attribute}) Member Updated.`);
