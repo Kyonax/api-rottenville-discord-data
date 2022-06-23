@@ -16,7 +16,7 @@ app.get('/guilds', async (req, res) => {
     let json = await Exe.readJSON(process.env.JSON_ACCESS)
     let _jsonTemporal = JSON.parse(json).data;
 
-    for( var i in _jsonTemporal){
+    for (var i in _jsonTemporal) {
         delete _jsonTemporal[i].members;
     }
 
@@ -27,7 +27,7 @@ app.get('/guild/:guild', async (req, res) => {
     let json = await Exe.readJSON(process.env.JSON_ACCESS)
     let _jsonTemporal = JSON.parse(json).data;
 
-    for( var i in _jsonTemporal){
+    for (var i in _jsonTemporal) {
         delete _jsonTemporal[i].members;
     }
 
@@ -43,14 +43,14 @@ app.get('/guild/:guild/members/:type', async (req, res) => {
     let json = await Exe.readJSON(process.env.JSON_ACCESS)
     let _jsonTemporal = JSON.parse(json).data[req.params.guild].members[req.params.type];
 
-    for( var i in _jsonTemporal){
+    for (var i in _jsonTemporal) {
         delete _jsonTemporal[i].rank;
         delete _jsonTemporal[i].status;
         delete _jsonTemporal[i].perms;
         delete _jsonTemporal[i].bank;
     }
 
-    res.send(_jsonTemporal)        
+    res.send(_jsonTemporal)
 });
 
 app.get('/guild/:guild/member/:id', async (req, res) => {
@@ -62,8 +62,8 @@ app.get('/guild/:guild/member/:id', async (req, res) => {
 
 router.post('/guild/create', async function (req, res) {
     try {
-        let json = await Exe.readJSON(process.env.JSON_ACCESS);           
-        const { id, owner, language, key } = req.body;        
+        let json = await Exe.readJSON(process.env.JSON_ACCESS);
+        const { id, owner, language, key } = req.body;
         let _objJSON = JSON.parse(json);
 
         let _obj = {
@@ -74,7 +74,7 @@ router.post('/guild/create', async function (req, res) {
         }
 
         if (key === process.env.PASS) {
-            _objJSON.data[id] = _obj;                              
+            _objJSON.data[id] = _obj;
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
             res.status(200).send("POST - New Guild Created.");
         }
@@ -92,7 +92,7 @@ router.post('/member/create', async function (req, res) {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         const { id, guild, language, key } = req.body;
         let _objJSON = JSON.parse(json);
-        
+
         let _obj = {
             id: id,
             guild: guild,
@@ -131,7 +131,7 @@ router.post('/member/create', async function (req, res) {
 router.post('/member/perms/:type/add', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
-        const { id, guild, value, key } = req.body;        
+        const { id, guild, value, key } = req.body;
         let _objJSON = JSON.parse(json);
         let _member = _objJSON.data[guild].members.all[id];
 
@@ -157,7 +157,8 @@ router.delete('/guild/delete', async function (req, res) {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
         const { id, key } = req.body;
-
+        console.log(req)
+        console.log(req.body)
         if (key === process.env.PASS) {
             delete _objJSON.data[id];
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
@@ -176,7 +177,7 @@ router.delete('/member/delete', async function (req, res) {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
         const { id, guild, key } = req.body;
-        
+
 
         if (key === process.env.PASS) {
             delete _objJSON.data[guild].members.all[id];
@@ -201,7 +202,7 @@ router.patch('/member/data/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, guild, attribute, value, key } = req.body;        
+        const { id, guild, attribute, value, key } = req.body;
 
         if (key === process.env.PASS) {
             _objJSON.data[guild].members.all[id][attribute] = value;
@@ -224,10 +225,10 @@ router.patch('/member/status/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, guild, attribute, value, key } = req.body;        
+        const { id, guild, attribute, value, key } = req.body;
 
         if (key === process.env.PASS) {
-            _objJSON.data[guild].members.all[id].status[attribute] = value;            
+            _objJSON.data[guild].members.all[id].status[attribute] = value;
 
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
             res.status(200).send(`UPDATE - ${id} (${attribute}) Member Updated.`);
@@ -244,10 +245,10 @@ router.patch('/member/bank/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, guild, attribute, value, key } = req.body;        
+        const { id, guild, attribute, value, key } = req.body;
 
         if (key === process.env.PASS) {
-            _objJSON.data[guild].members.all[id].bank[attribute] = value;            
+            _objJSON.data[guild].members.all[id].bank[attribute] = value;
 
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
             res.status(200).send(`UPDATE - ${id} (${attribute}) Member Updated.`);
@@ -264,10 +265,10 @@ router.patch('/guild/data/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, attribute, value, key } = req.body;        
+        const { id, attribute, value, key } = req.body;
 
         if (key === process.env.PASS) {
-            _objJSON.data[id][attribute] = value;            
+            _objJSON.data[id][attribute] = value;
 
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
             res.status(200).send(`UPDATE - ${id} (${attribute}) Guild Updated.`);
