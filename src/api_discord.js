@@ -63,8 +63,7 @@ app.get('/guild/:guild/member/:id', async (req, res) => {
 router.post('/guild/create', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);           
-        const { id, owner, language, key } = req.body;
-        console.log(req.body)
+        const { id, owner, language, key } = req.body;        
         let _objJSON = JSON.parse(json);
 
         let _obj = {
@@ -88,10 +87,10 @@ router.post('/guild/create', async function (req, res) {
     }
 });
 
-app.post('/member/create', async function (req, res) {
+router.post('/member/create', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
-        const { id, guild, language, key } = req.query;
+        const { id, guild, language, key } = req.body;
         let _objJSON = JSON.parse(json);
         
         let _obj = {
@@ -129,10 +128,10 @@ app.post('/member/create', async function (req, res) {
     }
 });
 
-app.post('/member/perms/:type/add', async function (req, res) {
+router.post('/member/perms/:type/add', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
-        const { id, guild, value, key } = req.query;        
+        const { id, guild, value, key } = req.body;        
         let _objJSON = JSON.parse(json);
         let _member = _objJSON.data[guild].members.all[id];
 
@@ -153,11 +152,11 @@ app.post('/member/perms/:type/add', async function (req, res) {
 
 //DELETE 
 
-app.delete('/guild/delete', async function (req, res) {
+router.delete('/guild/delete', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, key } = req.query;
+        const { id, key } = req.body;
 
         if (key === process.env.PASS) {
             delete _objJSON.data[id];
@@ -172,11 +171,11 @@ app.delete('/guild/delete', async function (req, res) {
     }
 });
 
-app.delete('/member/delete', async function (req, res) {
+router.delete('/member/delete', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, guild, key } = req.query;
+        const { id, guild, key } = req.body;
         
 
         if (key === process.env.PASS) {
@@ -198,11 +197,11 @@ app.delete('/member/delete', async function (req, res) {
 
 //UPDATE
 
-app.patch('/member/data/update', async function (req, res) {
+router.patch('/member/data/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, guild, attribute, value, key } = req.query;        
+        const { id, guild, attribute, value, key } = req.body;        
 
         if (key === process.env.PASS) {
             _objJSON.data[guild].members.all[id][attribute] = value;
@@ -221,11 +220,11 @@ app.patch('/member/data/update', async function (req, res) {
     }
 });
 
-app.patch('/member/status/update', async function (req, res) {
+router.patch('/member/status/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, guild, attribute, value, key } = req.query;        
+        const { id, guild, attribute, value, key } = req.body;        
 
         if (key === process.env.PASS) {
             _objJSON.data[guild].members.all[id].status[attribute] = value;            
@@ -241,11 +240,11 @@ app.patch('/member/status/update', async function (req, res) {
     }
 });
 
-app.patch('/member/bank/update', async function (req, res) {
+router.patch('/member/bank/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, guild, attribute, value, key } = req.query;        
+        const { id, guild, attribute, value, key } = req.body;        
 
         if (key === process.env.PASS) {
             _objJSON.data[guild].members.all[id].bank[attribute] = value;            
@@ -261,11 +260,11 @@ app.patch('/member/bank/update', async function (req, res) {
     }
 });
 
-app.patch('/guild/data/update', async function (req, res) {
+router.patch('/guild/data/update', async function (req, res) {
     try {
         let json = await Exe.readJSON(process.env.JSON_ACCESS);
         let _objJSON = JSON.parse(json);
-        const { id, attribute, value, key } = req.query;        
+        const { id, attribute, value, key } = req.body;        
 
         if (key === process.env.PASS) {
             _objJSON.data[id][attribute] = value;            
