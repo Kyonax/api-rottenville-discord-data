@@ -134,17 +134,16 @@ router.post('/member/perms/:type/update', async function (req, res) {
         const { id, guild, value, key } = req.body;
         let _objJSON = JSON.parse(json);
         let _member = _objJSON.data[guild].members.all[id];
+        let _perm_member = {
+            id: _member.id,
+            guild: _member.guild
+        }
 
         if (key === process.env.PASS) {
             if (value === 1) {
                 _member.perms[req.params.type] = value;                
-                _objJSON.data[guild].members[req.params.type][id] = _member;
-                delete _objJSON.data[guild].members[req.params.type][id].warnings
-                delete _objJSON.data[guild].members[req.params.type][id].language
-                delete _objJSON.data[guild].members[req.params.type][id].rank
-                delete _objJSON.data[guild].members[req.params.type][id].status
-                delete _objJSON.data[guild].members[req.params.type][id].perms
-                delete _objJSON.data[guild].members[req.params.type][id].bank
+                _objJSON.data[guild].members[req.params.type][id] = _perm_member;
+                
             } else {
                 _member.perms[req.params.type] = value;
                 delete _objJSON.data[guild].members[req.params.type][id]
