@@ -208,10 +208,7 @@ router.post('/member/data/update', async function (req, res) {
         const { id, guild, attribute, value, key } = req.body;
 
         if (key === process.env.PASS) {
-            _objJSON.data[guild].members.all[id][attribute] = value;
-            _objJSON.data[guild].members.admin[id][attribute] = value;
-            _objJSON.data[guild].members.inmortal[id][attribute] = value;
-            _objJSON.data[guild].members.moderator[id][attribute] = value;
+            _objJSON.data[guild].members.all[id][attribute] = value;           
 
             await Exe.writeJSON(_objJSON, process.env.JSON_ACCESS);
             res.status(200).send(`UPDATE - ${id} (${attribute}) Member Updated.`);
