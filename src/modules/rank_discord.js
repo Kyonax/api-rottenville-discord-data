@@ -1,7 +1,7 @@
 const Api = require('../../tools/api_discord_functions');
 const Exe = require('../../tools/functions');
 
-async function array(props, index) {    
+async function array(props, index) {
     try {
         let member = props.rank_users[index].id, week_member_rank = 0, month_member_rank = 0, month_iterator = 0, week_iterator = 0;
         let guild = props.rank_users[index].guild;
@@ -28,10 +28,14 @@ async function array(props, index) {
             updated: today.toUTCString(),
             special: {
                 week: {
+                    xp: props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.xp,
+                    level: props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.level,
                     data: week_member_rank,
                     timeFrom: "29 Jun 2022 02:16:11 GMT",
                 },
                 month: {
+                    xp: props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.xp,
+                    level: props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.level,
                     data: month_member_rank,
                     timeFrom: "30 Jun 2022 20:16:11 GMT"
                 }
@@ -114,16 +118,18 @@ async function run() {
         }
 
         return 0;
-    });    
+    });
 
     let _props = {
         ObjMembers: ObjMembers,
+        ObjMembers_Month: ObjMembers_Month,
+        ObjMembers_Week: ObjMembers_Week,
         rank_users: rank_users,
         rank_users_month: rank_users_month,
         rank_users_week: rank_users_week
     }
 
-    let _props_method = await Exe.propsObject(_props, "ObjMembers.rank_users.rank_users_month.rank_users_week")
+    let _props_method = await Exe.propsObject(_props, "ObjMembers.ObjMembers_Month.ObjMembers_Week.rank_users.rank_users_month.rank_users_week")
     await Exe.loopMethodEach(array, _props_method, 200, index, rank_users.length);
 
 
