@@ -28,13 +28,13 @@ async function array(props, index) {
             updated: today.toUTCString(),
             special: {
                 week: {
-                    xp: Math.abs(props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.xp - props.ObjMembers.data["894634118267146272"].members.all[member].status.xp),
+                    xp: Math.abs(props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.xp - props.rank_users[index].xp),
                     level: props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.level,
                     data: week_member_rank,
                     timeFrom: "29 Jun 2022 02:16:11 GMT",
                 },
                 month: {
-                    xp: Math.abs(props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.xp - props.ObjMembers.data["894634118267146272"].members.all[member].status.xp),
+                    xp: Math.abs(props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.xp - props.rank_users[index].xp),
                     level: props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.level,
                     data: month_member_rank,
                     timeFrom: "30 Jun 2022 20:16:11 GMT"
