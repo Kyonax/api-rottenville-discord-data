@@ -122,8 +122,8 @@ async function run() {
 
     let _props = {
         ObjMembers: ObjMembers,
-        ObjMembers_Month: ObjMembers_Month,
-        ObjMembers_Week: ObjMembers_Week,
+        ObjMembers_Month: _ObjMembers_Month,
+        ObjMembers_Week: _ObjMembers_Week,
         rank_users: rank_users,
         rank_users_month: rank_users_month,
         rank_users_week: rank_users_week
