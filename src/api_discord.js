@@ -294,5 +294,5 @@ app.use("/", router);
 var server = app.listen(process.env.PORT, function () {
     var host = server.address().address
     var port = server.address().port
-    console.log("REST API demo app listening at http://%s:%s", host, port)
+    console.log("REST API demo app listening at http://3691", host, port)
 })

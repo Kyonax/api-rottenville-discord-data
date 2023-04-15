@@ -84,7 +84,7 @@ module.exports = {
                 "Access-Control-Allow-Origin": "*",
             }
         }
-        axios.post(process.env.API_DISCORD + `/guild/delete`, _obj, _config)
+       await  axios.post(process.env.API_DISCORD + `/guild/delete`, _obj, _config)
             .then(function (response) {
                 console.log(response);
             }).catch(function (error) {
@@ -100,7 +100,7 @@ module.exports = {
                 "Access-Control-Allow-Origin": "*",
             }
         }
-        axios.post(process.env.API_DISCORD + `/member/delete`, _obj, _config)
+       await  axios.post(process.env.API_DISCORD + `/member/delete`, _obj, _config)
             .then(function (response) {
                 console.log(response);
             }).catch(function (error) {
@@ -115,7 +115,7 @@ module.exports = {
                 "Access-Control-Allow-Origin": "*",
             }
         }
-        axios.post(process.env.API_DISCORD + `/member/perms/${type}/update`, _obj, _config)
+       await  axios.post(process.env.API_DISCORD + `/member/perms/${type}/update`, _obj, _config)
             .then(function (response) {
                 console.log(response);
             }).catch(function (error) {
@@ -130,7 +130,7 @@ module.exports = {
                 "Access-Control-Allow-Origin": "*",
             }
         }
-        axios.post(process.env.API_DISCORD + `/member/data/update`, _obj, _config)
+       await  axios.post(process.env.API_DISCORD + `/member/data/update`, _obj, _config)
             .then(function (response) {
                 //console.log(response.data);
             }).catch(function (error) {
@@ -145,7 +145,7 @@ module.exports = {
                 "Access-Control-Allow-Origin": "*",
             }
         }
-        axios.post(process.env.API_DISCORD + `/member/status/update`, _obj, _config)
+       await  axios.post(process.env.API_DISCORD + `/member/status/update`, _obj, _config)
             .then(function (response) {
                 console.log(response);
             }).catch(function (error) {
@@ -160,7 +160,7 @@ module.exports = {
                 "Access-Control-Allow-Origin": "*",
             }
         }
-        axios.post(process.env.API_DISCORD + `/member/bank/update`, _obj, _config)
+       await  axios.post(process.env.API_DISCORD + `/member/bank/update`, _obj, _config)
             .then(function (response) {
                 console.log(response);
             }).catch(function (error) {
@@ -175,7 +175,7 @@ module.exports = {
                 "Access-Control-Allow-Origin": "*",
             }
         }
-        axios.post(process.env.API_DISCORD + `/guild/data/update`, _obj, _config)
+       await  axios.post(process.env.API_DISCORD + `/guild/data/update`, _obj, _config)
             .then(function (response) {
                 console.log(response);
             }).catch(function (error) {

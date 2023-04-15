@@ -31,13 +31,13 @@ async function array(props, index) {
                     xp: Math.abs(props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.xp - props.rank_users[index].xp),
                     level: props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.level,
                     data: week_member_rank,
-                    timeFrom: "29 Jun 2022 02:16:11 GMT",
+                    timeFrom: today.toUTCString(),
                 },
                 month: {
                     xp: Math.abs(props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.xp - props.rank_users[index].xp),
                     level: props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.level,
                     data: month_member_rank,
-                    timeFrom: "30 Jun 2022 20:16:11 GMT"
+                    timeFrom: today.toUTCString(),
                 }
             }
         }
@@ -77,6 +77,7 @@ async function specials(rank_users, other_rank) {
 }
 
 async function run() {
+	console.log("Functions")
     let ObjMembers = await Api.getMembers('894634118267146272'), rank_users = [], rank_users_month = [], rank_users_week = [], index = 0;
     let ObjMembers_Month = await Exe.readJSON("./src/data/Members_Month.json"), _ObjMembers_Month = JSON.parse(ObjMembers_Month);
     let ObjMembers_Week = await Exe.readJSON("./src/data/Members_Week.json"), _ObjMembers_Week = JSON.parse(ObjMembers_Week);
