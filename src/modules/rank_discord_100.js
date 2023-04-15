@@ -31,13 +31,13 @@ async function array(props, index) {
                     xp: Math.abs(props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.xp - props.rank_users[index].xp),
                     level: props.ObjMembers_Week.data["894634118267146272"].members.all[member].status.level,
                     data: week_member_rank,
-                    timeFrom: "29 Jun 2022 02:16:11 GMT",
+                    timeFrom: today.toUTCString(),
                 },
                 month: {
                     xp: Math.abs(props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.xp - props.rank_users[index].xp),
                     level: props.ObjMembers_Month.data["894634118267146272"].members.all[member].status.level,
                     data: month_member_rank,
-                    timeFrom: "30 Jun 2022 20:16:11 GMT"
+                    timeFrom: today.toUTCString(),
                 }
             }
         }
@@ -118,7 +118,8 @@ async function run() {
         }
 
         return 0;
-    });
+    })
+
 
     let _props = {
         ObjMembers: ObjMembers,
@@ -129,9 +130,8 @@ async function run() {
         rank_users_week: rank_users_week
     }
 
-    let _props_method = await Exe.propsObject(_props, "ObjMembers.ObjMembers_Month.ObjMembers_Week.rank_users.rank_users_month.rank_users_week")
-    await Exe.loopMethodEach(array, _props_method, 200, index, rank_users.length);
-
+    let _props_method = await Exe.propsObject(_props, "ObjMembers.rank_users.rank_users_month.rank_users_week")
+    await Exe.loopMethodEach(array, _props_method, 200, index, 100);
 
 }
 

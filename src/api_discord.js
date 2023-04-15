@@ -12,6 +12,8 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + "public"))
 
+app.get('/', (req, res) => res.json('Discord API is running! ☠️'))
+
 app.get('/guilds', async (req, res) => {
     let json = await Exe.readJSON(process.env.JSON_ACCESS)
     let _jsonTemporal = JSON.parse(json).data;
